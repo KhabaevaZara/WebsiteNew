@@ -1,3 +1,11 @@
+.logo{
+  width: 35px;
+  height: 35px;
+  
+}
+
+
+
 .burger-checkbox {
     position: absolute;
     visibility: hidden;
