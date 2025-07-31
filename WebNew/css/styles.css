@@ -152,6 +152,7 @@ bottom:calc(var(--index)* -4.5);
 }
 
 .layers__caption {
+  left: 50%;
   font-size: 5.9rem;
   letter-spacing: 0;
   margin-top: -1.9rem;
@@ -196,29 +197,45 @@ bottom:calc(var(--index)* -4.5);
       letter-spacing: normal;
   }
   100% {
-      letter-spacing: -0.5em;
+      letter-spacing: -2.5em;
   }
 }
 
+.big-o {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  font-size: 45rem; /* Размер большой буквы */
+  color: #578FCA;
+  text-shadow: 
+    7px 7px 0 #cfe7ff,
+    14px 14px 0 rgba(207, 231, 255, 0.5); /* Тень с эффектом глубины */
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* Улучшенная анимация для большой буквы */
 @keyframes growO {
   0% {
-      transform: scale(0);
-      opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
   }
   100% {
-      transform: scale(1.5);
-      opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
   }
 }
 
 @keyframes shrinkO {
-  0% {
-      transform: scale(1.5);
-      opacity: 1;
-  }
-  100% {
-      transform: scale(0);
-      opacity: 0;
+  to {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
   }
 }
 

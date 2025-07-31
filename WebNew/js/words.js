@@ -2,47 +2,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const letters = document.querySelectorAll('.letter');
     const wordContainer = document.getElementById('wordContainer');
     
-    // Анимация в несколько этапов
     function animateLetters() {
-        // 1. Катим буквы по одной
-        letters.forEach((letter, index) => {
-            letter.style.animation = `rollIn 0.8s ${index * 0.2}s forwards`;
-        });
-
-        // 2. После завершения качения всех букв, слипаем их
+      letters.forEach((letter, index) => {
+        letter.style.animation = `rollIn 0.8s ${index * 0.2}s forwards`;
+      });
+  
+      setTimeout(() => {
+        wordContainer.style.animation = 'stickTogether 0.3s forwards';
+        
         setTimeout(() => {
-            wordContainer.style.animation = 'stickTogether 0.5s forwards';
+          letters.forEach(letter => letter.style.opacity = '0');
+          
+          // Создаем большую букву "О"
+          const bigO = document.createElement('div');
+          bigO.className = 'big-o';
+          bigO.textContent = 'O';
+          wordContainer.appendChild(bigO);
+          
+          // Анимация появления большой буквы
+          setTimeout(() => {
+            bigO.style.animation = 'growO 0.7s forwards';
             
-            // 3. После слипания, скрываем все буквы
+            // Исчезновение большой буквы и восстановление слова
             setTimeout(() => {
-                // Скрываем все буквы
-                letters.forEach((letter) => {
-                    letter.style.opacity = '0';
+              bigO.style.animation = 'shrinkO 0.5s forwards';
+              
+              setTimeout(() => {
+                bigO.remove();
+                wordContainer.style.animation = 'reformWord 0.5s forwards';
+                
+                letters.forEach((letter, index) => {
+                  setTimeout(() => {
+                    letter.style.opacity = '1';
+                  }, index * 100);
                 });
                 
-                // 4. Через некоторое время возвращаем обратно в слово
                 setTimeout(() => {
-                    // Анимация появления оригинального слова
-                    wordContainer.style.animation = 'reformWord 0.8s forwards';
-                    
-                    // Плавно показываем все буквы обратно
-                    letters.forEach((letter, index) => {
-                        setTimeout(() => {
-                            letter.style.opacity = '1';
-                        }, index * 100);
-                    });
-                    
-                    // Устанавливаем финальный отступ
-                    setTimeout(() => {
-                        wordContainer.style.letterSpacing = '1.25rem';
-                    }, 800);
-                }, 1500);
-            }, 500);
-        }, letters.length * 200 + 800);
+                  wordContainer.style.letterSpacing = '1.25rem';
+                }, 500);
+              }, 500);
+            }, 1500); // Время показа большой буквы
+          }, 10);
+        }, 500);
+      }, 1600); // letters.length * 200 + 800
     }
-
-    // Запускаем анимацию после небольшой задержки
-    setTimeout(() => {
-        animateLetters();
-    }, 100);
-});
+  
+    setTimeout(animateLetters, 100);
+  });
