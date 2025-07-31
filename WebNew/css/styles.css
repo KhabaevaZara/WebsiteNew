@@ -132,6 +132,9 @@ body{
   z-index: 1;
   text-transform: uppercase;
   font-weight: 900;
+    transform: translate3d(0 , calc(var(--scrollTop)/2), 0);
+    will-change: transform;
+    transition: var(--transition);
 
 }
 

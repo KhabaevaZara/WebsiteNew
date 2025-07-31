@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Общее время анимации всех букв + небольшая задержка
         const totalLettersAnimationTime = letters.length * 1500 + 500;
         
-        // 2. Анимация появления оригинального слова после завершения анимации букв
+        // 2. Анимация появлениxя оригинального слова после завершения анимации букв
         setTimeout(() => {
             wordContainer.style.animation = 'reformWord 0.29s forwards';
             
