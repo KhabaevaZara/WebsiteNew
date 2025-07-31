@@ -5,60 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/styles.css"/>
-    <script src="/WebNew/libs/gsap/gsap.min.js" defer></script>
-    <script src="/WebNew/libs/gsap/ScrollTrigger.min.js" defer></script>
-    <script src="/WebNew/libs/gsap/ScrollSmoother.min.js" defer></script>
-    <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
-    <link rel="shortcut icon" href="images/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png" />
-    <link rel="manifest" href="images/site.webmanifest" />
-    <script src="/WebNew/js/app.js" defer></script>
     <script src="/WebNew/js/words.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --index: calc(1vw + 1vh);
+            --text: #cbebffd7;
+            --transition: transform .75s cubic-bezier(.075, .5, 0, 1);
+        }
+        
+        @font-face {
+            font-family: raleway_f;
+            src: url(../fonts/raleway-regular.woff2);
+        }
+        
+        @font-face {
+            font-family: raleway_f;
+            src: url(../fonts/raleway-black.woff2);
+            font-weight: 900;
+        }
+        
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .layers {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .layer__header {
+            z-index: 1;
+            text-transform: uppercase;
+            font-weight: 900;
+            transform: translate3d(0, calc(var(--scrollTop)/2), 0);
+            will-change: transform;
+            transition: var(--transition);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .layers__caption {
+            font-size: 5.9rem;
+            letter-spacing: 0;
+            text-shadow:
+                2px 2px 0 #cfe7ff,
+                3px 3px 0 #cfe7ff,
+                4px 4px 0 #cfe7ff,
+                5px 5px 0 #cfe7ff,
+                6px 6px 0 #cfe7ff,
+                7px 7px 0 #cfe7ff;
+            display: inline-flex;
+            white-space: nowrap;
+        }
+        
+        .letter {
+            position: relative;
+            transform: translateX(-100vw);
+            display: inline-block;
+            opacity: 0;
+            animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: opacity 0.5s ease;
+            color: #578FCA;
+        }
+        
+        @keyframes rollIn {
+            0% {
+                transform: translateX(calc(100vw - 50px)) rotate(720deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) rotate(360deg);
+                opacity: 1;
+            }
+        }
+        
+        .main-header {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+        
+        .content-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+            z-index: 10;
+        }
+        
+        .content-header.visible {
+            transform: translateY(0);
+        }
+        
+        .main-header.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        
+        .content {
+            min-height: 200vh;
+            padding-top: 100vh;
+            background: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
+    <div class="content-header">
+        <h1>Your Header Content Here</h1>
+    </div>
+    
     <header class="main-header">
         <div class="layers">
             <div class="layer__header">
                 <div class="layers__caption" id="wordContainer">
-                 <span class="letter">o</span>
+                    <span class="letter">o</span>
                     <span class="letter">z</span>
                     <span class="letter">o</span>
                     <span class="letter">n</span>
                 </div>
             </div>
-            
-                
-                <div class="layers__title">Ваши желания в синих коробках!</div>
-            
-            <div class="layer layers__base" style="background-image: url(/WebNew/images/Снимок\ экрана\ 2025-07-30\ в\ 09.53.19.png);"></div>
-            <div class="layer layers__middle " style="background-image: url();"></div>
-            <div class="layer layers__front" style="background-image: url(/img/layer-front.png);"></div>
         </div>
     </header>
-
-    <div style="background-color: #3674B5; width: 980px; height: 30px; border-radius: 5px; margin-bottom: 5px;"></div>
-    <div style="background-color: #578FCA; width: 980px; height: 30px; border-radius: 5px; margin-bottom: 5px;"></div>
-    <div style="background-color: #cfe7ff; width: 980px; height: 30px; border-radius: 5px; margin-bottom: 5px;"></div>
-    <div style="background-color: #c5e8fe; width: 980px; height: 30px; border-radius: 5px;"></div>
-    <div class="header">
-        <div class="conteiner">
-            <div class="header__top">
-                <nav class="menu">
-                    <ul class="menu__list">
-                        <li class="menu_item"><a href="#" class="menu__link">Home</a></li>
-                        <li class="menu_item"><a href="#" class="menu__link">Products</a></li>
-                        <li class="menu_item"><a href="#" class="menu__link">Contacts</a></li>
-                        <li class="menu_item"><a href="#" class="menu__link">About Us</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+    
+    <div class="content">
+        <!-- Your content here -->
     </div>
     
-    
-
-
-  
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const letters = document.querySelectorAll('.letter');
+            const wordContainer = document.getElementById('wordContainer');
+            const mainHeader = document.querySelector('.main-header');
+            const contentHeader = document.querySelector('.content-header');
+            let animationCompleted = false;
+            
+            function animateLetters() {
+                letters.forEach((letter, index) => {
+                    letter.style.animation = `rollIn 5s ${index * 1.5}s forwards`;
+                });
+                
+                const totalLettersAnimationTime = letters.length * 800 + 500;
+                setTimeout(() => {
+                    wordContainer.style.animation = 'reformWord 0.29s forwards';
+                    setTimeout(() => {
+                        wordContainer.style.letterSpacing = '0.25rem';
+                        animationCompleted = true;
+                    }, 130);
+                }, totalLettersAnimationTime);
+            }
+            
+            setTimeout(animateLetters, 10);
+            
+            window.addEventListener('scroll', () => {
+                if (animationCompleted && window.scrollY > 50) {
+                    mainHeader.classList.add('hidden');
+                    contentHeader.classList.add('visible');
+                } else {
+                    mainHeader.classList.remove('hidden');
+                    contentHeader.classList.remove('visible');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
