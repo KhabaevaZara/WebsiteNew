@@ -43,6 +43,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            flex-direction: column;
         }
         
         .layers__caption {
@@ -67,6 +68,21 @@
             animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transition: opacity 0.5s ease;
             color: #578FCA;
+        }
+        
+        .subtitle {
+            font-size: 2rem;
+            color: #578FCA;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+            text-shadow: 1px 1px 0 #cfe7ff;
+        }
+        
+        .subtitle.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         @keyframes rollIn {
@@ -388,6 +404,10 @@
                 font-size: 3.5rem;
             }
             
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
             .content-header nav {
                 gap: 15px;
             }
@@ -417,6 +437,7 @@
                     <span class="letter">o</span>
                     <span class="letter">n</span>
                 </div>
+                <div class="subtitle" id="subtitle">Marketplace</div>
             </div>
         </div>
     </div>
@@ -563,6 +584,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const letters = document.querySelectorAll('.letter');
             const wordContainer = document.getElementById('wordContainer');
+            const subtitle = document.getElementById('subtitle');
             const mainHeader = document.querySelector('.main-header');
             const contentHeader = document.getElementById('contentHeader');
             let animationCompleted = false;
@@ -577,6 +599,8 @@
                     wordContainer.style.animation = 'reformWord 0.29s forwards';
                     setTimeout(() => {
                         wordContainer.style.letterSpacing = '0.25rem';
+                        // Показываем подзаголовок после анимации букв
+                        subtitle.classList.add('visible');
                         animationCompleted = true;
                     }, 130);
                 }, totalLettersAnimationTime);
